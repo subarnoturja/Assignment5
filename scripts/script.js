@@ -8,23 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const grandPriceDisplay = document.getElementById('grand-price');
     
     let selectedSeats = [];
-    let totalSeatLeft = 40; // Total available seats
-    let totalPrice = 0; // Total price without discount
-    let grandTotal = 0; // Total price with discount
-    
-    // Function to update seat count display
+    let totalSeatLeft = 40;
+    let totalPrice = 0; 
+    let grandTotal = 0;
+ 
     function updateSeatCount() {
         seatCountDisplay.textContent = selectedSeats.length;
         totalSeatDisplay.textContent = totalSeatLeft - selectedSeats.length;
     }
-    
-    // Function to update total price and grand total
+
     function updatePrice() {
-        totalPrice = selectedSeats.length * 550; // Price per seat
+        totalPrice = selectedSeats.length * 550; 
         totalPriceDisplay.textContent = totalPrice;
         grandTotal = totalPrice;
         if (couponInput.value === 'NEW15') {
-            grandTotal *= 0.85; // Applying 15% discount
+            grandTotal *= 0.85;
         }
         else if(couponInput.value === 'Couple 20'){
             grandTotal *= 0.80;
@@ -32,9 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         grandPriceDisplay.textContent = grandTotal;
     }
-    
-    // Event listener for seat buttons
-    seatButtons.forEach(function (button) {
+
+    for(const button of seatButtons) {
         button.addEventListener('click', function () {
             if (!selectedSeats.includes(button.textContent)) {
                 if (selectedSeats.length < 4) {
@@ -57,12 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 applyButton.disabled = true;
             }
         });
-    });
+    }
     
-    // Event listener for coupon apply button
     applyButton.addEventListener('click', function () {
         if (couponInput.value === 'NEW15') {
-            grandTotal *= 0.85; // Applying 15% discount
+            grandTotal *= 0.85; 
             grandPriceDisplay.textContent = grandTotal;
         } 
         else if(couponInput.value === 'Couple 20'){
@@ -72,6 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             alert('Invalid coupon code.');
         }
-        couponInput.value = ''; // Clearing the input field
+        couponInput.value = ''; 
     });
 });
